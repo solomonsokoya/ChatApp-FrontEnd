@@ -71,7 +71,7 @@ async logInWithFacebook(){
     if(type == 'success'){
       const credential = firebase.auth.FacebookAuthProvider.credential(token)
       firebase.auth().signInAndRetrieveDataWithCredential(credential).then((currentUser) => {
-         this.props.navigation.navigate('DrawerNavigator', currentUser)
+         this.props.navigation.navigate('TabNav', currentUser)
       }).catch((error) =>{
       console.log(error)
     })
