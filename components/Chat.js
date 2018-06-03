@@ -11,23 +11,29 @@ class Chat extends Component{
       name: 'Solo',
       messages: []
     }
+    this.socket = io('https://solomonschatappserver.herokuapp.com/', {jsonp: false});
+  }
 
+  componentDidMount(){
+    this.socket.on('chat message', (msg) => {
+      this.setState(prevState => ({
+      messages: GiftedChat.append(prevState.messages, msg),
+       }))
+    });
 
-    this.socket = io('exp://173.2.2.192:19000', {jsonp: false});
-    this.socket.on('update', () => {
-      console.log('inside on')
-      return this.setState({ messages: [{__id: 1, text: 'I work'}] });
-    }
-      )}
+  }
 
-
-    onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+    onSend(messages) {
+      console.log(messages[0])
+      this.socket.emit('chat message', messages)
+        this.setState(previousState => ({
+        messages: GiftedChat.append(previousState.messages, messages),
     }))
   }
 
   render(){
+    console.log(this.props)
+
     return(
       <GiftedChat
         messages={this.state.messages}

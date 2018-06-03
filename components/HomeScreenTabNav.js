@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import {createBottomTabNavigator} from 'react-navigation';
 import Chatroom from './Chat';
+import UserPage from './UserPage'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Friends from './Friends';
 
@@ -35,6 +36,12 @@ const HomeScreenTabNavigator = createBottomTabNavigator({
     screen: Chatroom,
     navigationOptions: {
       tabBarLabel: 'Chatroom'
+    }
+  },
+  UserPage:{
+    screen: UserPage,
+    navigationOptions: {
+      tabBarLabel: 'UserPage'
     }
   }
 })
